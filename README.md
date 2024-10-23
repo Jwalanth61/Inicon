@@ -44,7 +44,7 @@ To install the required packages and set up a virtual environment, you can use t
 
    ```bash
    ./install_requirements.sh
-   
+   ```
    This will:
    - Check for the installation of Python3, pip, and Subfinder.
    - Create a virtual environment named `myenv`, activate it, and install the necessary packages (`aiohttp` and `requests`).
