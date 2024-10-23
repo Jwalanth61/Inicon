@@ -28,9 +28,19 @@ To install Inicon, follow these steps:
 ## Usage
 
 To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
-```bash
-python3 inicon.py -d <domain> [options]
-
-
-
    
+   python3 inicon.py -d <domain> [options]
+   
+## Example Commands
+   1. **Perform Subdomain Enumeration:**
+      ```bash
+      python3 inicon.py -d example.com --subenum -w subdomains.txt
+   2. **Check Live Subdomains After Enumeration:**
+      ```bash
+      python3 inicon.py -d example.com --livesub
+   3. **Check for Metafiles on Live Subdomains:**
+      ```bash
+      python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
+   4. **Perform All Functions at Once:**
+      ```bash
+      python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
