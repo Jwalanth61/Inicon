@@ -87,7 +87,6 @@ To use Inicon, run the script from the command line with the appropriate flags. 
 
        ```bash
       python3 inicon.py -d example.com --metafiles
-  
 
 ## Flags Used in the Tool
 
