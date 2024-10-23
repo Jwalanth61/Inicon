@@ -20,7 +20,17 @@ To install Inicon, follow these steps:
    ```bash
    git clone https://github.com/yourusername/inicon.git
 2. **Navigate to the Directory**: Change to the directory where Inicon is located:
-   '''bash
+    ```bash
    cd inicon
+3. **Make the Script Executable (optional)**: You can make the script executable by running:
+   ```bash
+   chmod +x inicon.py
+## Usage
+
+To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
+```bash
+python3 inicon.py -d <domain> [options]
+
+
 
    
