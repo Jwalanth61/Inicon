@@ -1,4 +1,4 @@
-# Inicon---Initial-Reconnaissance
+# Inicon--Initial-Reconnaissance
 
 ## Tool Description
 
