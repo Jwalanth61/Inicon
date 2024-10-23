@@ -1,11 +1,11 @@
-# Inicon--Initial-Reconnaissance
+# Inicon---Initial-Reconnaissance
 
 ## Tool Description
 
 **Inicon** (short for **Initial Recon**) is a command-line reconnaissance tool designed to assist security professionals and enthusiasts in performing initial reconnaissance on domains. Inicon automates essential tasks like subdomain enumeration, live subdomain checks, and metafile enumeration. The tool is built using Python3 and is suitable for penetration testers, red teamers, and cybersecurity analysts who need to gather information about their target domains efficiently.
 
 With Inicon, users can:
-- Identify potential subdomains of a given domain using a specified wordlist.
+- Identify potential subdomains of a given domain using subfinder.
 - Verify which of the found subdomains are live (responding).
 - Retrieve important metafiles like `robots.txt`, `security.txt`, `sitemap.xml`, `humans.txt`, and `.well-known/security.txt` from live subdomains.
 
@@ -45,6 +45,10 @@ To install the required packages and set up a virtual environment, you can use t
    ```bash
    ./install_requirements.sh
    
+   This will:
+   - Check for the installation of Python3, pip, and Subfinder.
+   - Create a virtual environment named `myenv`, activate it, and install the necessary packages (`aiohttp` and `requests`).
+   
 3. **To activate the virtual environment later, use**:
    ```bash
    source myenv/bin/activate
@@ -57,6 +61,7 @@ To install the required packages and set up a virtual environment, you can use t
 ## Usage
 
 To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
+  
    ```bash
    python3 inicon.py -d <domain> [options]
    ```
@@ -64,15 +69,22 @@ To use Inicon, run the script from the command line with the appropriate flags. 
 ## Example Commands
 
    1. **Perform Subdomain Enumeration**:
+
       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt
+      
    2. **Check Live Subdomains After Enumeration**:
-      ```bash
+
+       ```bash
       python3 inicon.py -d example.com --livesub
+       
    3. **Check for Metafiles on Live Subdomains**:
-      ```bash
+
+       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
+       
    4. **Perform All Functions at Once**:
+
       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
 
@@ -90,6 +102,5 @@ To use Inicon, run the script from the command line with the appropriate flags. 
 ### Notes
 
 - Ensure the script has execute permissions (`chmod +x install_requirements.sh`) before running it.
-- Adjust the script and instructions as needed based on any additional requirements or changes you make to your project. 
 
 Let me know if you need further adjustments or any additional features!
