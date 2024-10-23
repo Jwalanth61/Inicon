@@ -28,9 +28,9 @@ To install Inicon, follow these steps:
 ## Usage
 
 To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
-   
-   python3 inicon.py -d <domain> [options]
-   
+```bash
+python3 inicon.py -d <domain> [options]
+```
 ## Example Commands
    1. **Perform Subdomain Enumeration:**
       ```bash
@@ -44,3 +44,12 @@ To use Inicon, run the script from the command line with the appropriate flags. 
    4. **Perform All Functions at Once:**
       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
+
+Flags Used in the Tool
+`-d, --domain:` Specify the domain to perform reconnaissance on. This flag is required.
+`--subenum:` Flag to perform subdomain enumeration using the specified wordlist.
+`--livesub:` Flag to check for live subdomains after enumeration.
+`--metafiles:` Flag to check for specific metafiles on live subdomains.
+`-w, --wordlist:` Specify the wordlist file to use for subdomain enumeration.
+`-v, --verbose:` Enable verbose output for detailed information during execution.
+`-h, --help:` Show the help message and exit.
