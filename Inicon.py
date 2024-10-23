@@ -4,7 +4,6 @@ import subprocess
 import os
 import asyncio
 import aiohttp
-import subprocess
 
 # Function to print the tool banner using figlet
 def print_banner():
@@ -38,25 +37,29 @@ async def check_single_subdomain(subdomain, verbose):
     url = f"https://{subdomain}"
     async with aiohttp.ClientSession() as session:
         try:
-            async with session.get(url, timeout=10) as response:  # Increased timeout
+            async with session.get(url, timeout=10) as response:
                 if response.status == 200:
-                    print(f"[+] {subdomain} is live!")
+                    if verbose:
+                        print(f"[+] {subdomain} is live!")
                     return subdomain
                 else:
-                    print(f"[-] {subdomain} returned status code {response.status}")
+                    if verbose:
+                        print(f"[-] {subdomain} returned status code {response.status}")
                     return None
         except asyncio.TimeoutError:
-            print(f"[-] Timeout occurred while checking {subdomain}.")
+            if verbose:
+                print(f"[-] Timeout occurred while checking {subdomain}.")
             return None
         except Exception as e:
-            print(f"[-] Error occurred while checking {subdomain}: {e}")
+            if verbose:
+                print(f"[-] Error occurred while checking {subdomain}: {e}")
             return None
 
 async def check_live_subdomains(subdomains, verbose=False):
     """Check which found subdomains are live."""
     live_urls = []
     not_live_urls = []
-    
+
     semaphore = asyncio.Semaphore(10)  # Limit to 10 concurrent requests
 
     async def check_with_semaphore(subdomain):
@@ -77,7 +80,7 @@ def run_check_live_subdomains(subdomains, verbose=False):
     return asyncio.run(check_live_subdomains(subdomains, verbose))
 
 # Function to check for metafiles on live URLs
-def check_metafiles(live_urls):
+def check_metafiles(live_urls, verbose=False):
     """Check for the presence of specific metafiles on live URLs."""
     metafiles = ['robots.txt', 'security.txt', 'sitemap.xml', 'humans.txt', '.well-known/security.txt']
     found_metafiles = []
@@ -88,12 +91,15 @@ def check_metafiles(live_urls):
             try:
                 response = requests.get(full_url, timeout=5)
                 if response.status_code == 200:
-                    print(f"[+] Found metafile: {full_url}")
+                    if verbose:
+                        print(f"[+] Found metafile: {full_url}")
                     found_metafiles.append(full_url)
                 else:
-                    print(f"[-] Metafile {metafile} not found at {full_url} (status code: {response.status_code})")
+                    if verbose:
+                        print(f"[-] Metafile {metafile} not found at {full_url} (status code: {response.status_code})")
             except requests.ConnectionError:
-                print(f"[-] Connection error while checking {full_url}.")
+                if verbose:
+                    print(f"[-] Connection error while checking {full_url}.")
 
     return found_metafiles
 
@@ -103,26 +109,10 @@ def create_parser():
         description="Inicon - Initial Recon Tool for Subdomain Enumeration, Live Subdomains, and Metafiles lookup"
     )
     parser.add_argument('-d', '--domain', help='Specify the domain for recon', required=True)
-    parser.add_argument('--subenum', action='store_true', help='Perform Subdomain Enumeration using subfinder')
-    parser.add_argument('--livesub', action='store_true', help='Check live subdomains')
-    parser.add_argument('--metafiles', action='store_true', help='Find specific metafiles on live subdomains')
+    parser.add_argument('--subenum', action='store_true', help='Print only subdomain enumeration results')
+    parser.add_argument('--livesub', action='store_true', help='Print only live subdomain results')
+    parser.add_argument('--metafiles', action='store_true', help='Print only metafiles results')
     parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose mode')
-
-    # Adding example commands to the help menu
-    parser.epilog = (
-        "Examples:\n"
-        "  Perform subdomain enumeration:\n"
-        "    python3 inicon.py -d example.com --subenum\n"
-        "\n"
-        "  Check live subdomains after enumeration:\n"
-        "    python3 inicon.py -d example.com --livesub\n"
-        "\n"
-        "  Check for metafiles on live subdomains:\n"
-        "    python3 inicon.py -d example.com --subenum --livesub --metafiles\n"
-        "\n"
-        "  Perform all functions at once:\n"
-        "    python3 inicon.py -d example.com --subenum --livesub --metafiles\n"
-    )
 
     return parser
 
@@ -133,50 +123,49 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
 
-    # If no flags are provided, print help
-    if not any(vars(args).values()):
-        parser.print_help()
-        exit()
+    # Perform Subdomain Enumeration
+    subdomains = subdomain_enum(args.domain, args.verbose if args.subenum else False)
 
-    # Subdomain Enumeration
-    if args.subenum:
-        print("\n--------------------------------------------")
-        print("Subdomain enumeration")
-        print("--------------------------------------------")
-        subdomains = subdomain_enum(args.domain, args.verbose)
+    # Check for Live Subdomains
+    live_urls, not_live_urls = run_check_live_subdomains(subdomains, args.verbose if args.livesub else False)
+
+    # Check for Metafiles on Live URLs
+    found_metafiles = check_metafiles(live_urls, args.verbose if args.metafiles else False)
+
+    # Determine what results to print based on the flags
+    if not args.subenum and not args.livesub and not args.metafiles:
+        # No flags provided, print all results
         print("\n[*] Found subdomains:")
         print("--------------------------------------------")
         for sub in subdomains:
             print(f"[+] {sub}")
-        print("--------------------------------------------\n")
-
-    # Check for Live Subdomains
-    if args.livesub:
-        print("\n--------------------------------------------")
-        print("Live hosts")
+        print("\n[*] Live URLs:")
         print("--------------------------------------------")
-        if 'subdomains' in locals():
-            live_urls, not_live_urls = run_check_live_subdomains(subdomains, args.verbose)
-            print(f"\n[*] Live URLs:")
+        for live in live_urls:
+            print(f"[+] {live}")
+        print("\n[*] Metafiles found:")
+        print("--------------------------------------------")
+        for metafile in found_metafiles:
+            print(f"[+] {metafile}")
+    else:
+        # Print specific results based on flags
+        if args.subenum:
+            print("\n[*] Found subdomains:")
+            print("--------------------------------------------")
+            for sub in subdomains:
+                print(f"[+] {sub}")
+
+        if args.livesub:
+            print("\n[*] Live URLs:")
             print("--------------------------------------------")
             for live in live_urls:
                 print(f"[+] {live}")
-            print("\n[*] Not Live URLs:")
-            print("--------------------------------------------")
-            for not_live in not_live_urls:
-                print(f"[-] {not_live}")
-            print("--------------------------------------------\n")
 
-            # Check for Metafiles on Live URLs
-            if args.metafiles:
-                print("\n--------------------------------------------")
-                print("Metafile")
-                print("--------------------------------------------")
-                print(f"[*] Checking for metafiles on live URLs...")
-                check_metafiles(live_urls)
-                print("--------------------------------------------")
-        else:
-            print("Error: Please perform subdomain enumeration first using --subenum.")
+        if args.metafiles:
+            print("\n[*] Metafiles found:")
+            print("--------------------------------------------")
+            for metafile in found_metafiles:
+                print(f"[+] {metafile}")
 
 if __name__ == "__main__":
     main()
