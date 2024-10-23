@@ -17,15 +17,43 @@ To install Inicon, follow these steps:
 
 1. **Clone the Repository**:
    Open your terminal and clone the repository using the following command:
+   
    ```bash
    git clone https://github.com/yourusername/inicon.git
+   
 2. **Navigate to the Directory**: Change to the directory where Inicon is located:
+   
     ```bash
    cd inicon
+    
 3. **Make the Script Executable (optional)**: You can make the script executable by running:
+   
    ```bash
    chmod +x inicon.py
+
+## Requirements
+
+To install the required packages and set up a virtual environment, you can use the provided bash script. Follow these steps:
+
+1. **Make the script executable**:
+ 
+   ```bash
+   chmod +x install_requirements.sh
    
+2. **Run the script**:
+
+   ```bash
+   ./install_requirements.sh
+   
+3. **To activate the virtual environment later, use**:
+   ```bash
+   source myenv/bin/activate
+
+4. **To deactivate the virtual environment, simply run**:
+
+   ```bash
+   deactivate
+
 ## Usage
 
 To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
@@ -35,16 +63,16 @@ To use Inicon, run the script from the command line with the appropriate flags. 
 
 ## Example Commands
 
-   1. **Perform Subdomain Enumeration:**
+   1. **Perform Subdomain Enumeration**:
       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt
-   2. **Check Live Subdomains After Enumeration:**
+   2. **Check Live Subdomains After Enumeration**:
       ```bash
       python3 inicon.py -d example.com --livesub
-   3. **Check for Metafiles on Live Subdomains:**
+   3. **Check for Metafiles on Live Subdomains**:
       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
-   4. **Perform All Functions at Once:**
+   4. **Perform All Functions at Once**:
       ```bash
       python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
 
@@ -58,3 +86,10 @@ To use Inicon, run the script from the command line with the appropriate flags. 
 - `-v, --verbose`: Enable verbose output for detailed information during execution.
 - `-h, --help`: Show the help message and exit.
 
+
+### Notes
+
+- Ensure the script has execute permissions (`chmod +x install_requirements.sh`) before running it.
+- Adjust the script and instructions as needed based on any additional requirements or changes you make to your project. 
+
+Let me know if you need further adjustments or any additional features!
