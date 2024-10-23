@@ -71,22 +71,20 @@ To use Inicon, run the script from the command line with the appropriate flags. 
    1. **Perform Subdomain Enumeration**:
 
       ```bash
-      python3 inicon.py -d example.com --subenum -w subdomains.txt
+      python3 inicon.py -d example.com --subenum
       
    2. **Check Live Subdomains After Enumeration**:
 
        ```bash
-      python3 inicon.py -d example.com --livesub
+      python3 inicon.py -d example.com --subenum --livesub
+   >Performing subdomain enum is must as the tool check for live subdomains from the results generated from subenum.
        
    3. **Check for Metafiles on Live Subdomains**:
 
        ```bash
-      python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
-       
-   4. **Perform All Functions at Once**:
-
-      ```bash
-      python3 inicon.py -d example.com --subenum -w subdomains.txt --livesub --metafiles
+      python3 inicon.py -d example.com --subenum --livesub --metafiles
+   > Tool will check for metafiles on the live subdomains generated from the livesub results.
+  
 
 ## Flags Used in the Tool
 
