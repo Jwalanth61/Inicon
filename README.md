@@ -49,11 +49,11 @@ To install the required packages and set up a virtual environment, you can use t
    - Check for the installation of Python3, pip, and Subfinder.
    - Create a virtual environment named `myenv`, activate it, and install the necessary packages (`aiohttp` and `requests`).
    
-3. **To activate the virtual environment later, use**:
+3. **To activate the virtual environment, use**:
    ```bash
    source myenv/bin/activate
 
-4. **To deactivate the virtual environment, simply run**:
+4. **To deactivate the virtual environment later, simply run**:
 
    ```bash
    deactivate
