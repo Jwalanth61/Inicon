@@ -24,7 +24,7 @@ To install Inicon, follow these steps:
 2. **Navigate to the Directory**: Change to the directory where Inicon is located:
    
     ```bash
-   cd inicon
+   cd Inicon
     
 3. **Make the Script Executable (optional)**: You can make the script executable by running:
    
