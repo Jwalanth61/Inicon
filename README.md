@@ -19,7 +19,7 @@ To install Inicon, follow these steps:
    Open your terminal and clone the repository using the following command:
    
    ```bash
-   git clone https://github.com/yourusername/inicon.git
+   git clone https://github.com/Jwalanth61/Inicon--Initial_Reconnaissance.git
    
 2. **Navigate to the Directory**: Change to the directory where Inicon is located:
    
