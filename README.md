@@ -50,11 +50,11 @@ To install the required packages and set up a virtual environment, you can use t
    - Create a virtual environment named `myenv`, activate it, and install the necessary packages (`aiohttp` and `requests`).
 > If you got an error installing the subfinder, please upgrade the **go** to the latest version using this [link](https://go.dev/doc/install)
    
-3. **To activate the virtual environment, use**:
+3. **To activate the virtual environment later, use**:
    ```bash
    source myenv/bin/activate
 
-4. **To deactivate the virtual environment later, simply run**:
+4. **To deactivate the virtual environment, simply run**:
 
    ```bash
    deactivate
