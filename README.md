@@ -74,17 +74,17 @@ To use Inicon, run the script from the command line with the appropriate flags. 
       ```bash
       python3 inicon.py -d example.com
    
-   2. **Perform Subdomain Enumeration**:
+   2. **List Subdomains**:
 
       ```bash
       python3 inicon.py -d example.com --subenum
       
-   3. **Check Live Subdomains**:
+   3. **List Live Subdomains**:
 
        ```bash
       python3 inicon.py -d example.com --livesub
        
-   4. **Check for Metafiles**:
+   4. **List Subdomains with Metafiles**:
 
        ```bash
       python3 inicon.py -d example.com --metafiles
