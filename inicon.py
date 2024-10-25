@@ -108,7 +108,7 @@ def create_parser():
     parser = argparse.ArgumentParser(
         description="Inicon - Initial Recon Tool for Subdomain Enumeration, Live Subdomains, and Metafiles lookup"
     )
-    parser.add_argument('-d', '--domain', help='Specify the domain for recon', required=True)
+    parser.add_argument('-d', '--domain', help='Specify the domain for recon', required=False)
     parser.add_argument('--subenum', action='store_true', help='Print only subdomain enumeration results')
     parser.add_argument('--livesub', action='store_true', help='Print only live subdomain results')
     parser.add_argument('--metafiles', action='store_true', help='Print only metafiles results')
@@ -123,18 +123,22 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
 
+    if not args.domain:
+        print("Error: Please provide a domain with the -d flag.")
+        return
+
     # Perform Subdomain Enumeration
-    subdomains = subdomain_enum(args.domain, args.verbose if args.subenum else False)
+    subdomains = subdomain_enum(args.domain, args.verbose)
 
     # Check for Live Subdomains
-    live_urls, not_live_urls = run_check_live_subdomains(subdomains, args.verbose if args.livesub else False)
+    live_urls, not_live_urls = run_check_live_subdomains(subdomains, args.verbose)
 
     # Check for Metafiles on Live URLs
-    found_metafiles = check_metafiles(live_urls, args.verbose if args.metafiles else False)
+    found_metafiles = check_metafiles(live_urls, args.verbose)
 
     # Determine what results to print based on the flags
     if not args.subenum and not args.livesub and not args.metafiles:
-        # No flags provided, print all results
+        # No specific result flags, print all results
         print("\n[*] Found subdomains:")
         print("--------------------------------------------")
         for sub in subdomains:
