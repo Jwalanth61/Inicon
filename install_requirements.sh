@@ -28,9 +28,24 @@ if ! command_exists subfinder; then
         exit 1
     fi
 
-    echo "Subfinder installed successfully!"
+    # Check if the binary exists in the expected go bin directory
+    if [ -f "$HOME/go/bin/subfinder" ]; then
+        echo "Subfinder installed in $HOME/go/bin."
+
+        # Copy the subfinder binary to /usr/local/bin/ for system-wide use
+        echo "Copying Subfinder to /usr/local/bin/..."
+        sudo cp "$HOME/go/bin/subfinder" /usr/local/bin/
+        if [ $? -ne 0 ]; then
+            echo "Failed to copy Subfinder to /usr/local/bin/. Please check your permissions."
+            exit 1
+        fi
+        echo "Subfinder successfully copied to /usr/local/bin/ and is now available for direct use."
+    else
+        echo "Subfinder binary not found in $HOME/go/bin/. Please ensure it was installed correctly."
+        exit 1
+    fi
 else
-    echo "Subfinder is already installed."
+    echo "Subfinder is already installed and available in the CLI."
 fi
 
 # Create a virtual environment
