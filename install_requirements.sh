@@ -52,9 +52,6 @@ fi
 echo "Creating a virtual environment..."
 python3 -m venv myenv
 
-# Activate the virtual environment
-source myenv/bin/activate
-
 # Upgrade pip to the latest version
 echo "Upgrading pip..."
 pip install --upgrade pip
@@ -64,5 +61,3 @@ echo "Installing required packages..."
 pip install aiohttp requests
 
 echo "All requirements installed successfully!"
-echo "To activate the virtual environment, run: source myenv/bin/activate"
-echo "To deactivate the virtual environment, run: deactivate"
