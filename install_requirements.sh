@@ -48,9 +48,35 @@ else
     echo "Subfinder is already installed and available in the CLI."
 fi
 
+# Function to install python3-venv if it's missing
+install_python3_venv() {
+    echo "Virtual environment creation failed. Installing python3-venv..."
+    sudo apt install -y python3-venv
+    if [ $? -eq 0 ]; then
+        echo "python3-venv installed successfully. Recreating the virtual environment..."
+        create_virtualenv
+    else
+        echo "Failed to install python3-venv. Please try manually."
+        exit 1
+    fi
+}
+
+# Function to create a virtual environment
+create_virtualenv() {
+    python3 -m venv myenv
+    if [ $? -ne 0 ]; then
+        install_python3_venv
+    else
+        echo "Virtual environment created successfully."
+    fi
+}
+
 # Create a virtual environment
 echo "Creating a virtual environment..."
-python3 -m venv myenv
+create_virtualenv
+
+# Activate the virtual environment
+source myenv/bin/activate
 
 # Upgrade pip to the latest version
 echo "Upgrading pip..."
@@ -61,3 +87,4 @@ echo "Installing required packages..."
 pip install aiohttp requests
 
 echo "All requirements installed successfully!"
+
