@@ -48,7 +48,7 @@ To install the required packages and set up a virtual environment, you can use t
    This will:
    - Check for the installation of Python3, pip, and Subfinder.
    - Create a virtual environment named `myenv`, activate it, and install the necessary packages (`aiohttp` and `requests`).
-> If you got an error installing the subfinder, please upgrade the **go** to the latest version using this [link](https://go.dev/doc/install)
+> If you got an error installing the subfinder, please upgrade the **go** to the latest version using this [link](https://go.dev/doc/install).
    
 3. **To activate the virtual environment later, use**:
    ```bash
