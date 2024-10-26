@@ -58,8 +58,9 @@ To install the required packages and set up a virtual environment, you can use t
 
    ```bash
    deactivate
+> For a clear walkthrough of the installation steps, check out my blog.
 
-## Usage
+### Usage
 
 To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
   
