@@ -60,12 +60,6 @@ To install the required packages and set up a virtual environment, you can use t
    deactivate
 > For a clear walkthrough of the installation steps, check out my blog.
 
-
-
-
-https://github.com/user-attachments/assets/c7501db3-8dac-43c8-b685-58cc5d7357a1
-
-
 ### Usage
 
 To use Inicon, run the script from the command line with the appropriate flags. The general syntax is as follows:
