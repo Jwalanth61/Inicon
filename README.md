@@ -92,8 +92,8 @@ To use Inicon, run the script from the command line with the appropriate flags. 
 ## Flags Used in the Tool
 
 - `-d, --domain`: Specify the domain to perform reconnaissance on. This flag is **required**.
-- `--subenum`: Flag to perform subdomain enumeration using the specified wordlist.
-- `--livesub`: Flag to check for live subdomains after enumeration.
+- `--subenum`: Flag to view subdomain enumeration list.
+- `--livesub`: Flag to check and view for live subdomains.
 - `--metafiles`: Flag to check for specific metafiles on live subdomains.
 - `-w, --wordlist`: Specify the wordlist file to use for subdomain enumeration.
 - `-v, --verbose`: Enable verbose output for detailed information during execution.
