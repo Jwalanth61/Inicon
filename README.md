@@ -58,7 +58,7 @@ To install the required packages and set up a virtual environment, you can use t
 
    ```bash
    deactivate
-> For a clear walkthrough of the installation steps, check out my blog.
+> For a clear walkthrough of the installation steps, check out [my blog](https://medium.com/@jwalanth/inicon-a-one-stop-recon-tool-for-bug-bounty-hunters-8e1dcfa90a6c).
 
 ### Usage
 
